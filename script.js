@@ -94,7 +94,7 @@ generateBtn.addEventListener("click", summoner);
 
 // CHECK LENGTH and leave 10 in so user has min option ready
 function checkLength() {
-  pwdLength = parseInt(
+  password.pwdLength = parseInt(
     prompt(
       "State your password length, it must be between 10 and 64 characters",
       10
@@ -103,18 +103,21 @@ function checkLength() {
 
   // Check password is a number and not less than 10 or more than 64
 
-  if (isNaN(pwdLength) || pwdLength < 10 || pwdLength > 64) {
+  if (typeof password.pwdLength === "number") {
+      if (password.pwdLength < 10 || password.pwdLength > 64) {
         alert("Password must be between 10 and 64 characters");
         password.pwdLength = parseInt(
-          return false;
+          prompt(
+            "State your password length, it must be between 10 and 64 characters",
+          10
         )
-//       );
-//       return password.pwdLength;
-//     } else if (password.pwdLength >= 10 && password.pwdLength <= 64) {
-//       return password.pwdLength;
-//     }
-//   }
-// }
+      );
+      return password.pwdLength;
+    } else if (password.pwdLength >= 10 && password.pwdLength <= 64) {
+      return password.pwdLength;
+    }
+  }
+}
 
 // // Call function to show prompts for password generator criteria
 // showPrompts();
@@ -122,7 +125,7 @@ function checkLength() {
 // Function to push characters into the array
 function confirmTypes() {
 for (const type in pwdChoices) {
-      const addType = confirm('Would you like to include ${type}');
+      const addType = confirm('Would you like to include ' + type);
   if (addType === true) {
     charArray.push(...pwdChoices[type]);
     
