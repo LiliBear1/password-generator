@@ -1,30 +1,27 @@
 // !!! KEEP IT SIMPLE !!!
 
 // STEP 1 - I want to consider all my posible variables
-
-// * Length of password : between 10 characters but no more than 64.
-
 // (use ctrl+J on mac to bring onto one line)
 
-// Array of special characters to be included in password 
+// Array of special characters to be included in password
 var specialCharacters = [
-  '@', '%', '+', '\\', '/', "'", '!', '#', '$', '^', '?', ':', ',', ')', '(', '}', '{', ']', '[', '~', '-', '_', '.'
+  "@", "%", "+", "\\", "/", "'", "!", "#", "$", "^", "?", ":", ",", ")", "(", "}", "{", "]", "[", "~", "-", "_", ".",
 ];
 
 // Array of numeric characters to be included in password
-var numericCharacters = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+var numericCharacters = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
 // Array of lowercase characters to be included in password
 var lowerCasedCharacters = [
-  'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
+  "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
 ];
 
 // Array of uppercase characters to be included in password
 var upperCasedCharacters = [
-  'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
+  "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
 ];
 
-// Adding all the choices together  
+// step 2 - Adding all the choices together
 //   * Character types
 //       * Lowercase
 //       * Uppercase
@@ -32,17 +29,30 @@ var upperCasedCharacters = [
 //       * Special characters ($@%&*, etc)
 
 var pwdChoices = {
-  'l': lowerCasedCharacters,
-  'u': upperCasedCharacters,
-  'n': numericCharacters,
-  's': specialCharacters
+  'Lowercase Characters': lowerCasedCharacters,
+  'Uppercase Characters': upperCasedCharacters,
+  'Numeric Characters': numericCharacters,
+  'Special Characters': specialCharacters,
 };
+
+// Therefore password considerations
+// Length
+var pwdLength; 
+// Character array
+var charArray = [];
+// Array created from user selection of length and characters
+var pwdArray = [];
+// String conversion
+var pwdString = "";
+
+// STEP 3 - Create password object
+var password = { pwdLength, charArray, pwdString };
 
 // Function to prompt user for password options
 function getPasswordOptions(checkLength, confirmTypes) {
   checkLength();
-  confirmTypes(charTypes);
-  
+  confirmTypes(pwdChoices);
+
   return password;
 }
 
@@ -55,68 +65,101 @@ function getRandom(arr) {
 // Function to generate password with user input
 function generatePassword(arr, length, getRandom) {
   var i = 0;
+
   while (i < length) {
     i++;
-    passwordArray.push(getRandom(arr));
-
+    pwdArray.push(getRandom(arr));
   }
   return arrString();
-  
 }
 
-// Get references to the #generate element 
-var generateBtn = document.querySelector('#generate');
+// Get references to the #generate element
+var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
-  // This bit calls the generatePassword function 
-  var password = generatePassword();
-    // This bit gives the password an ID - I think
-  var passwordText = document.querySelector('#password');
-// This bit updates the text box - I think
-  passwordText.value = password;
+  // // This bit calls the generatePassword function
+  // var password = generatePassword();
+  // This bit gives the password an ID - I think
+  var passwordText = document.querySelector("#password");
+  // This bit updates the text box - I think
+  passwordText.value = password.pwdString;
 }
 
 // Add event listener to generate button
-generateBtn.addEventListener('click', writePassword);
-
-
-
- 
-
-
-
-
-  
-  // var l = prompt('Do you want Lowercase?');
-  // var u = prompt('Do you want Uppercase?');
-  // var n = prompt('Do you want a Numeric?');
-  // var s = prompt('Do you want a Special characters?');
-  // return [l,u,n,s];
-
-}
-// console.log(generatePassword)
-
-
-
-
+generateBtn.addEventListener("click", summoner);
+// replaced writePassword with summoner for prompts below
 
 //  * Code should validate for each input and at least one character type should be selected
 
+// CHECK LENGTH and leave 10 in so user has min option ready
+function checkLength() {
+  pwdLength = parseInt(
+    prompt(
+      "State your password length, it must be between 10 and 64 characters",
+      10
+    )
+  );
+
+  // Check password is a number and not less than 10 or more than 64
+
+  if (isNaN(pwdLength) || pwdLength < 10 || pwdLength > 64) {
+        alert("Password must be between 10 and 64 characters");
+        password.pwdLength = parseInt(
+          return false;
+        )
+//       );
+//       return password.pwdLength;
+//     } else if (password.pwdLength >= 10 && password.pwdLength <= 64) {
+//       return password.pwdLength;
+//     }
+//   }
+// }
+
+// // Call function to show prompts for password generator criteria
+// showPrompts();
+
+// Function to push characters into the array
+function confirmTypes() {
+for (const type in pwdChoices) {
+      const addType = confirm('Would you like to include ${type}');
+  if (addType === true) {
+    charArray.push(...pwdChoices[type]);
+    
+  }
+}
+  return password["charArray"];
+}
+
+// Function to convert pwdArray to a string
+function arrString() {
+  for (var i = 0; i < pwdArray.length; i++) {
+    var character = pwdArray[i];
+    password.pwdString += character;
+  }
+  return password.pwdString;
+}
+// Function to call other functions
+function summoner() {
+  getPasswordOptions(checkLength, confirmTypes);
+  getRandom(password.charArray);
+  generatePassword(password.charArray, password.pwdLength, getRandom);
+  writePassword();
+}
+
+
 //   * Once prompts are answered then the password should be generated and displayed in an alert or written to the page
 
-// * Present a series of prompts for password criteria 
+// * Present a series of prompts for password criteria
 
-prompt('Do you want a new random password?')
-prompt('Your password length will be between 10 to 64 characters')
+// prompt('Do you want a new random password?')
+// prompt('Your password length will be between 10 to 64 characters')
 // prompt ('Do you want Uppercase?')
 // prompt ('Do you want Lowercase?')
 // prompt ('Do you want a Numeric?')
 // prompt ('Do you want a Special characters?')
 
 // * Generate a password when the button is clicked
-
-
 
 // possible selections:
 
