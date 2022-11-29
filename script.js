@@ -123,6 +123,7 @@ function checkLength() {
 // showPrompts();
 
 // Function to push characters into the array
+// Present a series of prompts for password criteria
 function confirmTypes() {
 for (const type in pwdChoices) {
       const addType = confirm('Would you like to include ' + type);
@@ -150,19 +151,12 @@ function summoner() {
   writePassword();
 }
 
-
 //   * Once prompts are answered then the password should be generated and displayed in an alert or written to the page
 
-// * Present a series of prompts for password criteria
-
-// prompt('Do you want a new random password?')
-// prompt('Your password length will be between 10 to 64 characters')
-// prompt ('Do you want Uppercase?')
-// prompt ('Do you want Lowercase?')
-// prompt ('Do you want a Numeric?')
-// prompt ('Do you want a Special characters?')
-
 // * Generate a password when the button is clicked
+
+
+
 
 // possible selections:
 
